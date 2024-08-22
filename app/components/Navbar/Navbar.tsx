@@ -5,20 +5,32 @@ import Link from "next/link";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
 import RightSideIcons from "./RightSideIcons";
 import SearchForm from "./SearchForm";
+import MenuMobile from "./MenuMobile";
 
 const Navbar = () => {
 
   return (
-    <div className="px-10">
-      <nav className="max-w-8xl nav-bg bg-green-300 mx-auto p-5">
-        <div className="">
+    <div className="2xl:px-10 bg-red-300">
+      <nav className="max-w-7xl nav-bg bg-green-300 mx-auto py-2 xl:p-5">
+        {/* desktop navbar */}
+        <div className="hidden xl:block">
           <div className="flex justify-around">
 
-            <Image src={logo} alt="" className="w-40" />
+            <Image src={logo} alt="" className="w-1/6" />
 
             <SearchForm />
 
             <RightSideIcons />
+          </div>
+        </div>
+        {/* tablet navbar */}
+        <div className="xl:hidden">
+          <div className="flex items-center justify-between px-2 md:px-5">
+            <Image src={logo} alt="" className="w-24" />
+            <RightSideIcons />
+          </div>
+          <div className="px-2 md:px-5 py-2">
+            <SearchForm />
           </div>
         </div>
 
@@ -29,15 +41,15 @@ const Navbar = () => {
           <li>Home</li>
           <span className="flex gap-2 items-center">
             <li>Medicines</li>
-            <FaChevronDown className=""/>
+            <FaChevronDown className="" />
           </span>
           <span className="flex gap-2 items-center">
             <li>Products</li>
-            <FaChevronDown className=""/>
+            <FaChevronDown className="" />
           </span>
           <span className="flex gap-2 items-center">
             <li>Equipments</li>
-            <FaChevronDown className=""/>
+            <FaChevronDown className="" />
           </span>
           <span className="flex gap-2 items-center">
             <li>Online Doctos</li>
