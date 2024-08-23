@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { CgProfile } from 'react-icons/cg';
 
 const RightSideIcons = () => {
-    const navIcon = "w-8 h-8 text-teal-800";
+    const navIcon = "w-6 h-6 md:w-8 md:h-8 text-teal-800";
     const rightIconDivs = "flex items-center gap-2 lg:gap-3 ";
     return (
         <div className="flex justify-center xl:gap-5 2xl:gap-20">
@@ -24,9 +24,9 @@ const RightSideIcons = () => {
             </div>
 
             <div className={rightIconDivs}>
-                <div className='mr-5 mb-3'>
+                <div className='mr-5 mb-1 md:mb-3'>
                     <FaCartPlus className={`${navIcon} absolute`} />
-                    <span className="relative font-bold text-sm px-1.5 border border-sky-600 bg-sky-100 rounded-full left-6 bottom-1">0</span>
+                    <span className="relative font-bold text-xs md:text-sm px-0.5 md:px-1.5 border border-sky-600 text-white md:text-black bg-red-400 md:bg-sky-100 rounded-full left-4 bottom-1 md:left-6 md:bottom-1">0</span>
                 </div>
                 <span className="font-bold hidden xl:block">Cart</span>
             </div>

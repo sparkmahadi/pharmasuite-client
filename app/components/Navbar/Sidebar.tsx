@@ -1,5 +1,7 @@
-// components/Sidebar.tsx
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
+import SidebarContent from "./SidebarContent";
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,39 +11,25 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <>
-      {/* Toggle Button in Navbar */}
-      <button
-        className="fixed top-4 right-4 z-50 bg-blue-500 text-white p-2 rounded"
-        onClick={toggleSidebar}
-      >
-        Menu
-      </button>
-
-      {/* Sidebar */}
-      <div
-        className={`fixed top-0 right-0 h-full w-64 bg-gray-800 text-white transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        } transition-transform duration-300 ease-in-out`}
-      >
-        <div className="p-4">
-          <h2 className="text-lg font-bold">Sidebar</h2>
-          <ul>
-            <li className="py-2">Item 1</li>
-            <li className="py-2">Item 2</li>
-            <li className="py-2">Item 3</li>
-          </ul>
+    <div className="drawer drawer-end">
+      <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
+        {/* Page content here */}
+        <label htmlFor="my-drawer-4" className="drawer-button">
+          <GiHamburgerMenu className="w-6 h-6 text-teal-800"/>
+        </label>
+      </div>
+      <div className="drawer-side">
+        <label
+          htmlFor="my-drawer-4"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <div className="bg-base-200 text-base-content min-h-full w-64">
+          <SidebarContent />
         </div>
       </div>
-
-      {/* Overlay (optional, to close the sidebar when clicking outside) */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black opacity-50 z-40"
-          onClick={toggleSidebar}
-        ></div>
-      )}
-    </>
+    </div>
   );
 };
 
