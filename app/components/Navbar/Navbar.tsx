@@ -12,7 +12,7 @@ const Navbar = () => {
       <nav className="max-w-7xl nav-bg bg-green-300 mx-auto py-2 xl:p-5">
         {/* desktop navbar */}
         <div className="hidden xl:block">
-          <div className="flex justify-around">
+          <div className="flex justify-between">
             <Image src={logo} alt="" className="w-1/6" />
 
             <SearchForm />
