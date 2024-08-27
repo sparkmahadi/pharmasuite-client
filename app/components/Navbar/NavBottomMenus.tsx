@@ -4,7 +4,7 @@ import { FaChevronDown } from "react-icons/fa";
 
 const NavBottomMenus = () => {
   return (
-    <div className="lg:p-5 font-semibold hidden md:block">
+    <div className="lg:p-5 font-semibold hidden lg:block">
       <ul className="lg:flex lg:gap-10 items-center justify-center">
         <li>Home</li>
 

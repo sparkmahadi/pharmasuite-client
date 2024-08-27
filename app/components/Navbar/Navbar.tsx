@@ -8,8 +8,8 @@ import Sidebar from "./Sidebar";
 
 const Navbar = () => {
   return (
-    <div className="2xl:px-10 bg-red-300">
-      <nav className="max-w-7xl nav-bg bg-green-300 mx-auto py-2 xl:p-5">
+    <div className="2xl:px-10">
+      <nav className="max-w-7xl nav-bg 0 mx-auto py-2 xl:p-5">
         {/* desktop navbar */}
         <div className="hidden xl:block">
           <div className="flex justify-between">
