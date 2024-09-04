@@ -1,8 +1,9 @@
 export default async function getAllCategories() {
     const result = await fetch(
-        "http://localhost:5000/api/v1/categories",
+        `${process.env.base_url}/api/v1/other-products/categories`,
         {
-            next: { revalidate: 10}
+            // next: { revalidate: 1000},
+            cache: "no-cache",
         }
     )
 

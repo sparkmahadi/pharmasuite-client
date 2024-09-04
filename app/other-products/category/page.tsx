@@ -1,5 +1,5 @@
+import ShopByCategory from '@/app/components/Home/ShopByCategory';
 import React from 'react';
-import ShopByCategory from '../components/Home/ShopByCategory';
 
 const Category = () => {
     return (

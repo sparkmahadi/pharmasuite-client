@@ -1,13 +1,17 @@
+
+import getAllCategories from "@/lib/other-products/getAllCategories";
 import Link from "next/link";
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
 
-const NavBottomMenus = () => {
+const NavBottomMenus = async() => {
+  const categories = await getAllCategories();
   return (
     <div className="lg:p-5 font-semibold hidden lg:block">
       <ul className="lg:flex lg:gap-10 items-center justify-center">
-        <li>Home</li>
-
+        <Link href={"/"}>
+          <li>Home</li>{" "}
+        </Link>
         <div className="dropdown dropdown-hover">
           <div tabIndex={0} role="button" className="btn m-1">
             <span className="flex gap-2 items-center">
@@ -20,10 +24,14 @@ const NavBottomMenus = () => {
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
           >
             <li>
-              <Link href={"/otc-medicines"}>OTC Medicines</Link>
+              <Link href={"/main-products/category/otc-medicines"}>
+                OTC Medicines
+              </Link>
             </li>
             <li>
-              <Link href={"/otc-medicines"}>Prescription Medicines</Link>
+              <Link href={"/main-products/category/prescription-medicines"}>
+                Prescription Medicines
+              </Link>
             </li>
           </ul>
         </div>
@@ -39,20 +47,11 @@ const NavBottomMenus = () => {
             tabIndex={0}
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
           >
-            <li>
-              <Link href={"/otc-medicines"}>Healthcare Products
-              </Link>
-            </li>
-            <li>
-              <Link href={"/otc-medicines"}>Men's Products</Link>
-            </li>
-            <li>
-              <Link href={"/otc-medicines"}>Women's Products</Link>
-            </li>
-            <li>
-              <Link href={"/otc-medicines"}>
-              Baby Care</Link>
-            </li>
+            {categories?.map((cat) => (
+              <li key={cat._id}>
+                <Link href={cat.href}>{cat.title}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -68,10 +67,7 @@ const NavBottomMenus = () => {
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
           >
             <li>
-              <Link href={"/otc-medicines"}>OTC Medicines</Link>
-            </li>
-            <li>
-              <Link href={"/otc-medicines"}>Prescription Medicines</Link>
+              <Link href={"/other-products/category/devices-equipments"}>Devices and Equipments</Link>
             </li>
           </ul>
         </div>

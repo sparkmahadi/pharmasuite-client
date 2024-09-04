@@ -1,4 +1,5 @@
-import getAllCategories from "@/lib/getAllCategories";
+
+import getAllCategories from "@/lib/other-products/getAllCategories";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -14,24 +15,24 @@ interface ShopByCategoryProps {
   categories: Category[];
 }
 
-const ShopByCategory: React.FC = async () => {
+const ShopByCategory: React.FC<ShopByCategoryProps> = async () => {
 
   const categories = await getAllCategories();
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-3 lg:gap-6">
         
-      {categories.map((category:Category, index:number) => (
+      {categories.map((cat:Category, index:number) => (
         <div
           key={index}
           className="w-full bg-white shadow-lg rounded-lg overflow-hidden"
         >
           <div className="h-20 lg:h-[9rem]">
-            <Link href={category.href}>
+            <Link href={cat.href}>
               <Image
               width={300}
               height={300}
-                src={category.imgSrc}
-                alt={category.imgAlt}
+                src={cat.imgSrc}
+                alt={cat.imgAlt}
                 priority={false}
               />
             </Link>
@@ -39,9 +40,9 @@ const ShopByCategory: React.FC = async () => {
           <div className="p-2 text-center">
             <h2
               className="text-xs md:text-base font-semibold text-gray-800"
-              title={category.title}
+              title={cat.title}
             >
-              {category.title}
+              {cat.title}
             </h2>
           </div>
         </div>

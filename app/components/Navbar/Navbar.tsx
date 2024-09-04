@@ -5,6 +5,7 @@ import RightSideIcons from "./RightSideIcons";
 import SearchForm from "./SearchForm";
 import NavBottomMenus from "./NavBottomMenus";
 import Sidebar from "./Sidebar";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -13,7 +14,9 @@ const Navbar = () => {
         {/* desktop navbar */}
         <div className="hidden xl:block">
           <div className="flex justify-between">
-            <Image src={logo} alt="" className="w-1/6" />
+            <Link href={"/"} className="w-1/6">
+              <Image src={logo} alt="" />
+            </Link>
 
             <SearchForm />
 
