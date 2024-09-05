@@ -1,3 +1,17 @@
+export interface Category {
+    _id: string;
+    title: string;
+    cat_name: string;
+    cat_id: number;
+    href: string;
+    imgSrc: string;
+    imgAlt: string;
+  }
+  
+export interface ShopByCategoryProps {
+    categories: Category[];
+  }
+
 export interface Image {
     img: string;
 }
