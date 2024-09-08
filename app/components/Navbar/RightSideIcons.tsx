@@ -33,7 +33,7 @@ const RightSideIcons = () => {
 
             <div className={rightIconDivs}>
                 <Link
-                    href="/login"
+                    href="/account/login"
                     className="xl:flex items-center text-sm"
                 >
                     <span className="xl:block hidden mr-3">

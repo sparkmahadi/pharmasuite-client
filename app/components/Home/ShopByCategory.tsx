@@ -11,7 +11,7 @@ const ShopByCategory: React.FC<ShopByCategoryProps> = async ({categories}) => {
     <div>
       <h3 className={myStyles.pageTitle}>Shop by Categories</h3>
       <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-8 gap-3 lg:gap-6">
-        {categories.map((cat: Category, index: number) => (
+        {categories?.map((cat: Category, index: number) => (
           <div
             key={index}
             className="w-full bg-white shadow-lg rounded-lg overflow-hidden"

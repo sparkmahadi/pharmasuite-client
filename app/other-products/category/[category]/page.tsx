@@ -7,8 +7,9 @@ import React from "react";
 
 const CategoryDetails = async ({ params }) => {
   const { category } = params;
-  const products = await getOtherProductsByCat(category);
   const categoryDetails = await getCatByName(category);
+  const products = await getOtherProductsByCat(category);
+  console.log(category);
 
   return (
     <div>

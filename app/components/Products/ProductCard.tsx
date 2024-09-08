@@ -15,13 +15,16 @@ const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
       <Image src={medicineImg} alt="med" width={200}/>
       </figure>
 
-      <div>
+      {
+        product?.inventory[0]?.discount != 0 &&
+        <div>
         <Image src={discount} className="absolute top-0 left-3" alt=""/>
         <div className="absolute top-0 left-5 text-white font-semibold text-center">
           <p className="text-[0.6rem]">{product?.inventory[0].discount}%</p>
           <p className="text-[0.5rem]">OFF</p>
         </div>
       </div>
+      }
 
       <div className="p-3">
         <h2 className="card-title">{product.item_name}</h2>
@@ -33,7 +36,7 @@ const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
         </p>
         <p className="font-semibold pb-2">{product.sku_type}</p>
         
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
         <p className="text-sm">
           BDT. {product?.inventory[0].price}{" "}
           <span className="line-through pl-1">

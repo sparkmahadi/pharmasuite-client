@@ -5,11 +5,12 @@ export default async function getAllCategories() {
             // next: { revalidate: 1000},
             cache: "no-cache",
         }
-    )
+    );
+    const data = result.json();
 
     if (!result.ok) {
-        throw new Error("There was an error fetching categories");
-    }
+        console.log('error during fetching data');
+    } else
 
-    return result.json();
+    return data;
 }

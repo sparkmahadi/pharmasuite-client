@@ -4,15 +4,20 @@ import ProductCard from "../Products/ProductCard";
 import { MedicineItem } from "@/types/product";
 import { myStyles } from "@/app/variables/myStyles";
 import Image from "next/image";
-import mensImage from "@/public/Men's Products.webp";
 import catBg from "@/public/category-background.webp";
+import getCatByName from "@/lib/other-products/getCatByName";
 
-const MensProducts = async ({ products }) => {
+export interface CatNameProps{
+  catName : string,
+}
+const CategorySection : React.FC<CatNameProps> = async ({ catName }) => {
+    const products = await getOtherProductsByCat(catName);
+    const catDetails = await getCatByName(catName);
   //   console.log(products);
   return (
     <div>
       <div className="pb-10">
-        <h3 className={myStyles.pageTitle}>Men's Products</h3>
+        <h3 className={myStyles.pageTitle}>{catDetails?.title} Products</h3>
         <div>
           {products?.length ? (
             <div
@@ -24,7 +29,7 @@ const MensProducts = async ({ products }) => {
             </div>
           ) : (
             <p className="text-center text-orange-500 text-xl font-semibold">
-              No products found or added yet
+              No products found or in stock
             </p>
           )}
         </div>
@@ -34,22 +39,20 @@ const MensProducts = async ({ products }) => {
         <div className="flex gap-10 z-50 absolute">
           <div className="w-3/5 relative">
             <Image
-              src={mensImage}
+              src={catDetails?.banner_imgUrl}
+              layout="fill"
               alt=""
               className="absolute min-h-full max-h-full"
             />
           </div>
           <div className="w-1/4 flex items-center text-right">
             <p className="text-6xl text-transparent bg-clip-text bg-gradient-to-b from-teal-400 to-emerald-700 font-black">
-              Men's Products
+              {catDetails?.title}
             </p>
           </div>
           <div className="w-1/4 py-7">
             <p className="font-semibold text-sm">
-              Men's Products include all cosmetic products intended for use by
-              men, such as skincare products, hair care products, body care
-              products, sun care products, perfumes, and other decorative
-              cosmetics.
+              {catDetails?.cat_desc}
             </p>
           </div>
           <div className="w-1/6 flex justify-center items-center">
@@ -61,4 +64,4 @@ const MensProducts = async ({ products }) => {
   );
 };
 
-export default MensProducts;
+export default CategorySection;

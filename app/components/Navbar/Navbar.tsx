@@ -13,7 +13,7 @@ const Navbar = () => {
       <nav className="max-w-7xl nav-bg 0 mx-auto py-2 xl:p-5">
         {/* desktop navbar */}
         <div className="hidden xl:block">
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <Link href={"/"} className="w-1/6">
               <Image src={logo} alt="" />
             </Link>
