@@ -1,4 +1,4 @@
-"use client"; // This ensures the component is a Client Component
+"use client";
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,13 +8,10 @@ import { MdVisibility } from "react-icons/md";
 import { getUserByEmail } from "@/lib/users/getUserByEmail";
 import { setUserCred } from "@/redux/user/userSlice";
 
-type RootState = {
-  User: {
-    useDetails: any;
-  };
-};
-
 const Login = () => {
+  const userData = useSelector((state: any) => state.user.userDetails);
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false); // Password visibility state
   const [isLoading, setIsLoading] = useState(false);
@@ -31,16 +28,29 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    const userData = await getUserByEmail(formData?.email);
-    if (userData?.success) {
-      setUserCred(userData);
+    const userCred = await getUserByEmail(formData?.email, setIsLoading);
+    if (userCred?.success) {
+      dispatch(setUserCred(userCred?.data));
+      localStorage.setItem("user", JSON.stringify(userCred?.data));
       setIsLoading(false);
     } else {
       setIsLoading(false);
-      setError(userData?.message);
+      setError(userCred?.message);
     }
-    console.log(userData);
+    console.log(userCred);
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    if (userData?.email?.length !== 0) {
+      router.push("/");
+    }
+    setIsLoading(true);
+  }, [userData]);
+
+  if (isLoading) {
+    return <h3>Loding.....</h3>;
+  }
 
   return (
     <div className="flex items-center justify-center 2xl:py-20 bg-gray-100">
@@ -103,7 +113,7 @@ const Login = () => {
           </button>
           {error && <p className="text-red-500 text-center mt-4">{error}</p>}
           <p className="text-center text-sm font-semibold mt-4">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a href="/account/register" className="text-teal-500 font-bold">
               Register
             </a>

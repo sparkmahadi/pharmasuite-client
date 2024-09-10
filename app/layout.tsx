@@ -20,11 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
         <Providers>
+          <Navbar />
           <div className="max-w-7xl mx-auto">{children}</div>
+          <Footer />
         </Providers>
-        <Footer />
       </body>
     </html>
   );
