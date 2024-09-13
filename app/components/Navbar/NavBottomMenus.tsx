@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
 
-const NavBottomMenus = async() => {
+const NavBottomMenus = async () => {
   const categories = await getAllCategories();
   return (
     <div className="lg:p-5 font-semibold hidden lg:block">
@@ -47,11 +47,15 @@ const NavBottomMenus = async() => {
             tabIndex={0}
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
           >
-            {categories?.map((cat) => (
-              <li key={cat._id}>
-                <Link href={cat.href}>{cat.title}</Link>
-              </li>
-            ))}
+            {categories?.length > 0 ?
+              categories?.map((cat) => (
+                <li key={cat._id}>
+                  <Link href={cat.href}>{cat.title}</Link>
+                </li>
+              ))
+              :
+              <li><p>No categories found.</p></li>
+            }
           </ul>
         </div>
 
