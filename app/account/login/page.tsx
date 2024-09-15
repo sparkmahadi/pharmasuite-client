@@ -45,8 +45,9 @@ const Login = () => {
     if (userData?.email?.length !== 0) {
       router.push("/");
     }
-    setIsLoading(true);
-  }, [userData]);
+    setIsLoading(false);
+  }, [userData, router]);
+  
 
   if (isLoading) {
     return <h3>Loding.....</h3>;

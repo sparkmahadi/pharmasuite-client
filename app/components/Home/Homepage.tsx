@@ -4,7 +4,6 @@ import { myStyles } from "@/app/variables/myStyles";
 import MensProducts from "./MensProducts";
 import getAllCategories from "@/lib/other-products/getAllCategories";
 import getOtherProductsByCat from "@/lib/other-products/getOtherProductsByCat";
-import DevicesProducts from "./DeviceProducts";
 import CategorySection from "./CategorySection";
 
 const Homepage = async() => {

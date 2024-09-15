@@ -79,6 +79,10 @@ const NavBottomMenus = async () => {
         <span className="flex gap-2 items-center">
           <li>Online Doctos</li>
         </span>
+
+        <span className="flex gap-2 items-center">
+          <li><Link href={'/dashboard'}><p>Dashboard</p></Link></li>
+        </span>
       </ul>
     </div>
   );
