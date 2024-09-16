@@ -1,6 +1,6 @@
 export default async function postUser(formData: any) {
 
-  const result = await fetch(`${process.env.base_url}/api/v1/users/register`, {
+  const result = await fetch(`${process.env.BASE_URL}/api/v1/users/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

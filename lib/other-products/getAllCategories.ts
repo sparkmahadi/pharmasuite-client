@@ -1,6 +1,6 @@
 export default async function getAllCategories() {
     try {
-      const response = await fetch(`${process.env.base_url}/api/v1/other-products/categories`, {
+      const response = await fetch(`${process.env.BASE_URL}/api/v1/other-products/categories`, {
         // Optional revalidate for Next.js if needed: next: { revalidate: 1000 },
       });
   

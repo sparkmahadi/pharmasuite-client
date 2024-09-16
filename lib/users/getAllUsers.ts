@@ -1,6 +1,6 @@
 export default async function getAllUsers() {
     try {
-      const response = await fetch(`${process.env.base_url}/api/v1/users/all-users`);
+      const response = await fetch(`${process.env.BASE_URL}/api/v1/users/all-users`);
   
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

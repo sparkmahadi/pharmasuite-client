@@ -4,6 +4,7 @@ import Image from "next/image";
 import medicineImg from "@/public/fluclox-500-1631442367478.png"
 import discount from "@/public/discount.png";
 import React from "react";
+import AddToCartButton from "../Cart/AddToCartButton";
 
 const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
    const buttons = "btn bg-teal-500 hover:bg-green-700 text-white";
@@ -43,9 +44,9 @@ const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
             BDT. {product?.inventory[0].regular_price}
           </span>
         </p>
-          <button className={`${buttons} btn-sm`}>
-            Add
-          </button>
+          
+        <AddToCartButton productId={product._id} price={product?.inventory[0].price} productName={product.item_name}/>
+
         </div>
       </div>
     </div>

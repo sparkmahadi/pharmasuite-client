@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 export default async function getOtherProductsByCat(cat_name: string, limit: number) {
   try {
-    const res = await fetch(`${process.env.base_url}/api/v1/other-products/categories/${cat_name}/products?limit=${limit}`);
+    const res = await fetch(`${process.env.BASE_URL}/api/v1/other-products/categories/${cat_name}/products?limit=${limit}`);
 
     if (!res.ok) {
       throw new Error(`Failed to fetch products. Status: ${res.status}`);

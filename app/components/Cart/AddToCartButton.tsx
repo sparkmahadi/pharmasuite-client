@@ -1,39 +1,43 @@
-import { useState } from "react";
+"use client";
 
-const AddToCartButton = ({ productId }: { productId: string }) => {
-  const [isLoading, setIsLoading] = useState(false);
+import { addToCart } from "@/lib/users/cartFunction";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-  const addToCart = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch("/api/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ productId, quantity: 1 }),
-      });
+interface AddToCartButtonProps {
+  productId: string;
+  price: number;
+  productName: string
+}
 
-      const result = await response.json();
-      if (result.success) {
-        alert("Product added to cart");
-      } else {
-        alert(result.message);
-      }
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    } finally {
-      setIsLoading(false);
-    }
+const AddToCartButton: React.FC<AddToCartButtonProps> = ({
+  productId,
+  price, productName
+}) => {
+  const [isAdding, setIsAdding] = useState(false);
+  const userData = useSelector((state: any) => state.user.userDetails);
+
+  const handleAddToCart = async () => {
+    setIsAdding(true);
+    const cartData = {
+      userId: userData?._id,
+      productId,
+      productName,
+      quantity: 1,
+      price,
+    };
+    const cart = await addToCart(cartData);
+    setIsAdding(false);
+    console.log(cart);
   };
 
   return (
     <button
-      onClick={addToCart}
-      className="bg-blue-500 text-white px-4 py-2 rounded"
-      disabled={isLoading}
+      className="btn bg-teal-500 hover:bg-green-700 text-white btn-sm"
+      onClick={handleAddToCart}
+      disabled={isAdding} // Disable button when loading
     >
-      {isLoading ? "Adding..." : "Add to Cart"}
+      {isAdding ? "Adding..." : "Add"}
     </button>
   );
 };
