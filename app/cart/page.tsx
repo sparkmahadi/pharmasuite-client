@@ -1,30 +1,20 @@
 "use client";
 
+import { getCart } from "@/lib/users/cartFunction";
+import { setCart } from "@/redux/cart/cartSlice";
+import { hideLoader, showLoader } from "@/redux/user/loaderSlice";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../components/Loader";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const { _id: userId } = useSelector((state: any) => state.user.userDetails);
-  const [cart, setCart] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { cart } = useSelector((state: any) => state.cart);
+  const { loader } = useSelector((state: any) => state.user);
+  // const [cart, setCart] = useState<any[]>([]);
+  // const [loading, setLoading] = useState(true);
   const [isModified, setIsModified] = useState(false); // Track if cart has been modified
-
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const response = await fetch(`http://192.168.0.104:5000/api/v1/carts/${userId}`);
-        const data = await response.json();
-        if (data.success) {
-          setCart(data.cart);
-        }
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCart();
-  }, [userId]);
 
   const increaseQuantity = (productId: string) => {
     const updatedCart = cart.map((item) =>
@@ -79,7 +69,7 @@ const Cart = () => {
       const data = await response.json();
       if (data.success) {
         alert(`Order placed successfully! Order ID: ${data.orderId}`);
-        setCart([]); // Clear cart after placing order
+        dispatch(setCart([]));
         setIsModified(false);
       } else {
         alert("Failed to place order.");
@@ -90,7 +80,22 @@ const Cart = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+useEffect(() => {
+    dispatch(showLoader());
+    const loadCart = async () => {
+      try {
+        await getCart(userId, dispatch);
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        dispatch(hideLoader());
+      }
+    };
+
+    loadCart();
+  }, [userId, dispatch]);
+
+  if (loader) return <Loader/>;
 
   // Calculate total cost for individual items and the final total
   const totalCost = cart.reduce(
@@ -101,7 +106,7 @@ const Cart = () => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">My Cart</h2>
-      {cart.length ? (
+      {cart?.length ? (
         <div className="space-y-4">
           {cart.map((item: any) => (
             <div

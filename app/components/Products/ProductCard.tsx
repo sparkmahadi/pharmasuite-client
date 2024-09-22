@@ -5,6 +5,7 @@ import medicineImg from "@/public/fluclox-500-1631442367478.png"
 import discount from "@/public/discount.png";
 import React from "react";
 import AddToCartButton from "../Cart/AddToCartButton";
+import Link from "next/link";
 
 const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
    const buttons = "btn bg-teal-500 hover:bg-green-700 text-white";
@@ -28,7 +29,7 @@ const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
       }
 
       <div className="p-3">
-        <h2 className="card-title">{product.item_name}</h2>
+        <Link href={'/'}><h3 className="card-title">{product.item_name}</h3></Link>
         <p className="text-orange-500 font-semibold text-sm pb-1">{product.manufacturers}</p>
         <p className="text-xs pb-2">
           {product?.item_desc?.length > 70

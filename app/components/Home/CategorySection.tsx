@@ -9,9 +9,10 @@ import getCatByName from "@/lib/other-products/getCatByName";
 
 export interface CatNameProps{
   catName : string,
+  limit: number,
 }
-const CategorySection : React.FC<CatNameProps> = async ({ catName }) => {
-    const products = await getOtherProductsByCat(catName);
+const CategorySection : React.FC<CatNameProps> = async ({ catName, limit }) => {
+    const products = await getOtherProductsByCat(catName, limit);
     const catDetails = await getCatByName(catName);
   //   console.log(products);
   return (

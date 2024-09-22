@@ -18,10 +18,10 @@ const Homepage = async() => {
         <ShopByCategory categories={categories}/>
       </div>
       <div className="py-10">
-        <CategorySection catName={"mens-care"}/>
+        <CategorySection catName={"mens-care"} limit={10}/>
       </div>
       <div className="py-10">
-        <CategorySection catName={"devices-equipments"}/>
+        <CategorySection catName={"devices-equipments"} limit={10}/>
       </div>
     </div>
   );
