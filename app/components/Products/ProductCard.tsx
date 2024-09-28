@@ -8,24 +8,24 @@ import AddToCartButton from "../Cart/AddToCartButton";
 import Link from "next/link";
 
 const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
-   const buttons = "btn bg-teal-500 hover:bg-green-700 text-white";
+  const buttons = "btn bg-teal-500 hover:bg-green-700 text-white";
   return (
     <div
       className={`border card card-compact bg-base-100 shadow-xl relative ${myStyles.zoomOnHover}`}
     >
       <figure>
-      <Image src={medicineImg} alt="med" width={200}/>
+        <Image src={medicineImg} alt="med" width={200} />
       </figure>
 
       {
         product?.inventory[0]?.discount != 0 &&
         <div>
-        <Image src={discount} className="absolute top-0 left-3" alt=""/>
-        <div className="absolute top-0 left-5 text-white font-semibold text-center">
-          <p className="text-[0.6rem]">{product?.inventory[0].discount}%</p>
-          <p className="text-[0.5rem]">OFF</p>
+          <Image src={discount} className="absolute top-0 left-3" alt="" />
+          <div className="absolute top-0 left-5 text-white font-semibold text-center">
+            <p className="text-[0.6rem]">{product?.inventory[0].discount}%</p>
+            <p className="text-[0.5rem]">OFF</p>
+          </div>
         </div>
-      </div>
       }
 
       <div className="p-3">
@@ -37,16 +37,19 @@ const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
             : product?.item_desc}
         </p>
         <p className="font-semibold pb-2">{product.sku_type}</p>
-        
+
         <div className="flex justify-between items-center">
-        <p className="text-sm">
-          BDT. {product?.inventory[0].price}{" "}
-          <span className="line-through pl-1">
-            BDT. {product?.inventory[0].regular_price}
-          </span>
-        </p>
-          
-        <AddToCartButton productId={product._id} price={product?.inventory[0].price} productName={product.item_name}/>
+          <p className="text-sm">
+            BDT. {product?.inventory[0].price}{" "}
+            <span className="line-through pl-1">
+              BDT. {product?.inventory[0].regular_price}
+            </span>
+          </p>
+
+          {/* <AddToCartButton productId={product._id} price={product?.inventory[0].price} productName={product.item_name}/> */}
+          <Link href={`/products/${product._id}`}>
+            <button className={`${myStyles.buttons} btn-sm`}>View</button>
+          </Link>
 
         </div>
       </div>

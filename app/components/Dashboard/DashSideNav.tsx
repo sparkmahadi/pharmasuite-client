@@ -15,8 +15,8 @@ const DashSideNav: React.FC = () => {
     <div className="fixed left-0 top-0 w-64 h-full bg-[#f8f4f3] p-4 z-50 sidebar-menu transition-transform">
       <a href="#" className="flex items-center pb-4 border-b border-b-gray-800">
         <h2 className="font-bold text-2xl">
-          LOREM{' '}
-          <span className="bg-[#f84525] text-white px-2 rounded-md">IPSUM</span>
+          Pharma{' '}
+          <span className="bg-[#f84525] text-white px-2 rounded-md">Suite</span>
         </h2>
       </a>
       <ul className="mt-4">

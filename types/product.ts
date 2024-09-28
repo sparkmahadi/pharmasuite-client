@@ -54,3 +54,31 @@ export interface MedicineItem {
     related_items: any[];
     available_stock_qty_in_pc: number;
 }
+
+
+export interface ProductProps {
+  _id: any;
+  generic_name: any[];
+  images: any;
+  inventory: {
+    discount: any;
+    item_variation_option_id: number;
+    variation_option_id: number;
+    price: number;
+    regular_price: number;
+    variation_option_name: any;
+    qty_in_pcs: number;
+    stock_qty: number;
+    capacity: any;
+  }[];
+  cat_id: any;
+  cat_name: any;
+  manufacturers: any;
+  manufacturers_alias: any;
+  sku_type: any;
+  item_type: any;
+  is_showcasing: number;
+  item_name: any;
+  alias: any;
+  path: any;
+}

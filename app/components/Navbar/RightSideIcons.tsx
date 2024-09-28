@@ -11,6 +11,7 @@ import { clearUserCred, setUserCred } from "@/redux/user/userSlice";
 
 const RightSideIcons = () => {
   const userData = useSelector((state: any) => state.user.userDetails);
+  const cart = useSelector((state: any) => state.cart.cart);
   const dispatch = useDispatch();
   const navIcon = "w-6 h-6 md:w-8 md:h-8 text-teal-800";
   const rightIconDivs = "flex items-center gap-2 lg:gap-3 ";
@@ -46,7 +47,7 @@ const RightSideIcons = () => {
         <div className="mr-5 mb-1 md:mb-3">
           <FaCartPlus className={`${navIcon} absolute`} />
           <span className="relative font-bold text-xs md:text-sm px-0.5 md:px-1.5 border border-sky-600 text-white md:text-black bg-red-400 md:bg-sky-100 rounded-full left-4 bottom-1 md:left-6 md:bottom-1">
-            0
+            {cart?.length}
           </span>
         </div>
         <span className="font-bold hidden xl:block">

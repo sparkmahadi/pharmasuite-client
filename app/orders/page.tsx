@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import Loader from "../components/Loader";
 
 interface OrderItem {
   productId: string;
@@ -77,7 +78,7 @@ const OrderHistory = () => {
     return currentTime - orderTime <= twelveHoursInMillis;
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader/>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">

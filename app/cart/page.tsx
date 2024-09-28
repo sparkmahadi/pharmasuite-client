@@ -11,55 +11,70 @@ const Cart = () => {
   const dispatch = useDispatch();
   const { _id: userId } = useSelector((state: any) => state.user.userDetails);
   const { cart } = useSelector((state: any) => state.cart);
-  const { loader } = useSelector((state: any) => state.user);
-  // const [cart, setCart] = useState<any[]>([]);
-  // const [loading, setLoading] = useState(true);
-  const [isModified, setIsModified] = useState(false); // Track if cart has been modified
+  const { loading } = useSelector((state: any) => state.loader);
 
-  const increaseQuantity = (productId: string) => {
+  const [isModified, setIsModified] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);  // Loading state for saving cart
+  const [orderLoading, setOrderLoading] = useState(false); // Loading state for placing an order
+  const [errorMessage, setErrorMessage] = useState("");   // Error message
+
+  // Optimistically update cart and save immediately
+  const increaseQuantity = async (productId: string) => {
     const updatedCart = cart.map((item) =>
       item.productId === productId
         ? { ...item, quantity: item.quantity + 1 }
         : item
     );
-    setCart(updatedCart);
-    setIsModified(true);
+    dispatch(setCart(updatedCart));
+    await saveCart(updatedCart);
   };
 
-  const decreaseQuantity = (productId: string) => {
+  const decreaseQuantity = async (productId: string) => {
     const updatedCart = cart.map((item) =>
       item.productId === productId && item.quantity > 1
         ? { ...item, quantity: item.quantity - 1 }
         : item
     );
-    setCart(updatedCart);
-    setIsModified(true);
+    dispatch(setCart(updatedCart));
+    await saveCart(updatedCart);
   };
 
-  const deleteFromCart = (productId: string) => {
+  const deleteFromCart = async (productId: string) => {
     const updatedCart = cart.filter((item) => item.productId !== productId);
-    setCart(updatedCart);
-    setIsModified(true);
+    dispatch(setCart(updatedCart));
+    await saveCart(updatedCart);
   };
 
-  const saveCart = async () => {
+  const saveCart = async (updatedCart: any) => {
+    setSaveLoading(true);
+    setErrorMessage("");
     try {
-      const response = await fetch(`http://192.168.0.104:5000/api/v1/carts/${userId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart }),
-      });
+      const response = await fetch(
+        `http://192.168.0.104:5000/api/v1/carts/${userId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cart: updatedCart }),
+        }
+      );
       const data = await response.json();
       if (data.success) {
         console.log("Cart saved successfully");
         setIsModified(false);
+      } else {
+        throw new Error("Failed to save cart");
       }
     } catch (error) {
+      setErrorMessage("Error saving cart. Please try again.");
       console.error("Error saving cart:", error);
+    } finally {
+      setSaveLoading(false);
     }
   };
 
   const handlePlaceOrder = async () => {
+    setOrderLoading(true);
+    setErrorMessage("");
     try {
       const response = await fetch("http://192.168.0.104:5000/api/v1/orders/place", {
         method: "POST",
@@ -72,21 +87,27 @@ const Cart = () => {
         dispatch(setCart([]));
         setIsModified(false);
       } else {
-        alert("Failed to place order.");
+        throw new Error("Failed to place order");
       }
     } catch (error) {
+      setErrorMessage("Error placing order. Please try again.");
       console.error("Error placing order:", error);
-      alert("Failed to place order.");
+    } finally {
+      setOrderLoading(false);
     }
   };
 
-useEffect(() => {
+  useEffect(() => {
     dispatch(showLoader());
     const loadCart = async () => {
       try {
-        await getCart(userId, dispatch);
+        const cart = await getCart(userId);
+        if (cart?.length) {
+          dispatch(setCart(cart));
+        }
       } catch (error) {
-        console.error('Error:', error);
+        setErrorMessage("Error loading cart. Please try again.");
+        console.error("Error:", error);
       } finally {
         dispatch(hideLoader());
       }
@@ -95,9 +116,8 @@ useEffect(() => {
     loadCart();
   }, [userId, dispatch]);
 
-  if (loader) return <Loader/>;
+  if (loading) return <Loader />;
 
-  // Calculate total cost for individual items and the final total
   const totalCost = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -106,6 +126,11 @@ useEffect(() => {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">My Cart</h2>
+
+      {errorMessage && (
+        <p className="text-red-500 text-center">{errorMessage}</p>
+      )}
+
       {cart?.length ? (
         <div className="space-y-4">
           {cart.map((item: any) => (
@@ -122,6 +147,7 @@ useEffect(() => {
                   <button
                     className="px-2 py-1 text-white bg-blue-500 rounded"
                     onClick={() => decreaseQuantity(item.productId)}
+                    disabled={saveLoading}
                   >
                     -
                   </button>
@@ -129,6 +155,7 @@ useEffect(() => {
                   <button
                     className="px-2 py-1 text-white bg-blue-500 rounded"
                     onClick={() => increaseQuantity(item.productId)}
+                    disabled={saveLoading}
                   >
                     +
                   </button>
@@ -141,6 +168,7 @@ useEffect(() => {
                 <button
                   className="px-3 py-1 text-white bg-red-500 rounded ml-4"
                   onClick={() => deleteFromCart(item.productId)}
+                  disabled={saveLoading}
                 >
                   Delete
                 </button>
@@ -152,22 +180,15 @@ useEffect(() => {
               Total Cost: BDT {totalCost.toFixed(2)}
             </p>
           </div>
-          {isModified && (
-            <div className="flex justify-end mt-4 space-x-4">
-              <button
-                className="px-4 py-2 text-white bg-green-500 rounded-lg"
-                onClick={saveCart}
-              >
-                Save Changes
-              </button>
-              <button
-                className="px-4 py-2 text-white bg-teal-500 rounded-lg"
-                onClick={handlePlaceOrder}
-              >
-                Place Order
-              </button>
-            </div>
-          )}
+          <div className="flex justify-end mt-4 space-x-4">
+            <button
+              className={`px-4 py-2 text-white bg-teal-500 rounded-lg ${orderLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              onClick={handlePlaceOrder}
+              disabled={orderLoading || saveLoading}
+            >
+              {orderLoading ? "Placing Order..." : "Place Order"}
+            </button>
+          </div>
         </div>
       ) : (
         <p className="text-gray-500 text-center">Your cart is empty</p>
