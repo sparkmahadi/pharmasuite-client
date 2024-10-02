@@ -1,4 +1,4 @@
-import getAllProducts from '@/lib/admin/getAllProducts';
+import getAllProducts from '@/lib/all-products/getAllProducts';
 import getAllCategories from '@/lib/other-products/getAllCategories';
 import getAllUsers from '@/lib/users/getAllUsers';
 import React from 'react';

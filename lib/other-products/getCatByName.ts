@@ -6,7 +6,7 @@ export default async function getCatByName(cat_name: string) {
     let product = await res.json();
     return product;
   } catch (error) {
-    notFound();
+    console.log("notFound() route replace")
     console.log(error);
   }
 }

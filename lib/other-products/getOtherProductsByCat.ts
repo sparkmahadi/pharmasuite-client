@@ -4,20 +4,21 @@ export default async function getOtherProductsByCat(cat_name: string, limit: num
   try {
     const res = await fetch(`${process.env.BASE_URL}/api/v1/other-products/categories/${cat_name}/products?limit=${limit}`);
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch products. Status: ${res.status}`);
-    }
+    // if (!res.ok) {
+    //   throw new Error(`Failed to fetch products. Status: ${res.status}`);
+    // }
     const products = await res.json();
 
     if (!products || products.length === 0) {
-      notFound();
+      console.log('products by not found');
+      console.log("notFound() route replace")
     }
 
     return products;
 
   } catch (error) {
     console.error("Error fetching products:", error);
-    notFound();
+    console.log("notFound() route replace")
     return [];
   }
 }

@@ -1,15 +1,20 @@
-// components/Favourites.tsx
-import { useState, useEffect } from "react";
+"use client"
 
-const Favourites = ({ userId }: { userId: string }) => {
+import { getFavourites } from "@/lib/users/favouriteFunction";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+const Favourites = () => {
   const [favourites, setFavourites] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const { _id: userId } = useSelector((state: any) => state.user.userDetails);
+  // const { loading } = useSelector((state: any) => state.loader);
+
 
   useEffect(() => {
     const fetchFavourites = async () => {
       try {
-        const response = await fetch(`/api/favourites/${userId}`);
-        const data = await response.json();
+        const data = await getFavourites(userId);
         if (data.success) {
           setFavourites(data.favourites);
         }

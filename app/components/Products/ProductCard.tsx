@@ -29,7 +29,7 @@ const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
       }
 
       <div className="p-3">
-        <Link href={'/'}><h3 className="card-title">{product.item_name}</h3></Link>
+        <Link href={`/products/${product._id}`}><h3 className="card-title">{product.item_name}</h3></Link>
         <p className="text-orange-500 font-semibold text-sm pb-1">{product.manufacturers}</p>
         <p className="text-xs pb-2">
           {product?.item_desc?.length > 70
@@ -46,11 +46,9 @@ const ProductCard: React.FC<MedicinesProps> = ({ product }) => {
             </span>
           </p>
 
-          {/* <AddToCartButton productId={product._id} price={product?.inventory[0].price} productName={product.item_name}/> */}
-          <Link href={`/products/${product._id}`}>
-            <button className={`${myStyles.buttons} btn-sm`}>View</button>
-          </Link>
+          
 
+          <AddToCartButton productId={product._id} price={product?.inventory[0].price} productName={product.item_name}/>
         </div>
       </div>
     </div>

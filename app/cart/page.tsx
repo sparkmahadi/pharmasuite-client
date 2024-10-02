@@ -50,7 +50,7 @@ const Cart = () => {
     setErrorMessage("");
     try {
       const response = await fetch(
-        `http://192.168.0.104:5000/api/v1/carts/${userId}`,
+        `${process.env.BASE_URL}/api/v1/carts/${userId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -76,7 +76,7 @@ const Cart = () => {
     setOrderLoading(true);
     setErrorMessage("");
     try {
-      const response = await fetch("http://192.168.0.104:5000/api/v1/orders/place", {
+      const response = await fetch(`${process.env.BASE_URL}/api/v1/orders/place`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId }),

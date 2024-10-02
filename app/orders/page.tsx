@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Loader from "../components/Loader";
+import { getOrderHistory } from "@/lib/users/orderFunction";
 
 interface OrderItem {
   productId: string;
@@ -27,14 +28,14 @@ const OrderHistory = () => {
   useEffect(() => {
     const fetchOrderHistory = async () => {
       try {
-        const response = await fetch(
-          `http://192.168.0.104:5000/api/v1/orders/${userData._id}`
-        );
-        const data = await response.json();
-        if (data.success) {
+        const data = await getOrderHistory(userData?._id);
+        console.log(data);
+        if (data?.success) {
           setOrders(data.orders);
+        } else{ 
+          window.alert(data.message)
         }
-      } catch (error) {
+      } catch (error:any) {
         console.error("Error fetching order history:", error);
       } finally {
         setLoading(false);
@@ -46,7 +47,7 @@ const OrderHistory = () => {
   const cancelOrder = async (orderId: string) => {
     try {
       const response = await fetch(
-        `http://192.168.0.104:5000/api/v1/orders/cancel/${orderId}`,
+        `${process.env.BASE_URL}/api/v1/orders/cancel/${orderId}`,
         {
           method: "PATCH",
           headers: {

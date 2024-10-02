@@ -12,6 +12,7 @@ import { getFavourites } from "@/lib/users/favouriteFunction";
 import { getCart } from "@/lib/users/cartFunction";
 import { setCart } from "@/redux/cart/cartSlice";
 import { setOrders } from "@/redux/order/orderSlice";
+import Link from "next/link";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -28,14 +29,15 @@ const Dashboard = () => {
       try {
         dispatch(showLoader());
         const cart = await getCart(userId);
-        if(cart?.length){
+        if (cart?.length) {
           dispatch(setCart(cart));
         }
         const orders = await getOrderHistory(userId);
         console.log(orders);
-        if(orders?.length){
+        if (orders?.length) {
           dispatch(setOrders(orders));
         }
+        
         const products = await getMainProducts();
         const favorites = await getFavourites(userId);
 
@@ -72,22 +74,33 @@ const Dashboard = () => {
 
           {/* Cards Section for Summary */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div className="p-4 bg-white rounded-lg shadow">
-              <h3 className="text-lg font-bold">Orders</h3>
-              <p>Total Orders: {orders?.length}</p>
-            </div>
+
+            <Link href={"/orders"}>
+              <div className="p-4 bg-white rounded-lg shadow">
+                <h3 className="text-lg font-bold">Orders</h3>
+                <p>Total Orders: {orders?.length}</p>
+              </div>
+            </Link>
+
             <div className="p-4 bg-white rounded-lg shadow">
               <h3 className="text-lg font-bold">Products</h3>
               <p>Total Products Viewed: {totalProducts}</p>
             </div>
-            <div className="p-4 bg-white rounded-lg shadow">
-              <h3 className="text-lg font-bold">Favorites</h3>
-              <p>Favorite Items: {totalFavorites}</p>
-            </div>
-            <div className="p-4 bg-white rounded-lg shadow">
-              <h3 className="text-lg font-bold">Cart</h3>
-              <p>Cart Items: {cart?.length}</p>
-            </div>
+
+            <Link href={"/favourites"}>
+              <div className="p-4 bg-white rounded-lg shadow">
+                <h3 className="text-lg font-bold">Favorites</h3>
+                <p>Favorite Items: {totalFavorites}</p>
+              </div>
+            </Link>
+
+            <Link href={'/cart'}>
+              <div className="p-4 bg-white rounded-lg shadow">
+                <h3 className="text-lg font-bold">Cart</h3>
+                <p>Cart Items: {cart?.length}</p>
+              </div>
+            </Link>
+
           </div>
 
         </div>

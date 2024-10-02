@@ -1,8 +1,11 @@
 "use client"
 
+import AddToCartButton from '@/app/components/Cart/AddToCartButton';
+import AddToFavoritesButton from '@/app/components/Cart/AddToFavouritesButton';
 import getProductById from '@/lib/all-products/getProductById';
 import { hideLoader, showLoader } from '@/redux/user/loaderSlice';
 import { ProductProps } from '@/types/product';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -29,7 +32,7 @@ const ProductDetails = () => {
         };
 
         loadCart();
-    }, []);
+    }, [dispatch, id]);
 
     const {
         item_name,
@@ -38,7 +41,7 @@ const ProductDetails = () => {
         cat_name,
         path,
         alias,
-    } = product || {}; // Destructure only if product is not undefined
+    } = product || {};
     
 
     const productImage = product?.images[0]?.img || "default-image-path.jpg";
@@ -52,9 +55,11 @@ const ProductDetails = () => {
         <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
             {/* Product Image */}
             <div className="bg-gray-200 p-4">
-                <img
+                <Image
                     src={`/${productImage}`}
                     alt={item_name}
+                    width={100}
+                    height={100}
                     className="object-cover w-full h-64"
                 />
             </div>
@@ -101,6 +106,9 @@ const ProductDetails = () => {
                     <p className="text-sm text-gray-500">Path: {path}</p>
                 </div>
             </div>
+
+            <AddToFavoritesButton productId={product?._id}/>
+            <AddToCartButton productId={product?._id} price={price} productName={item_name}/>
         </div>
     );
 };

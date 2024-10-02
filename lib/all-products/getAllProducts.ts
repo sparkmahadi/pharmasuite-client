@@ -11,7 +11,7 @@ export default async function getAllProducts() {
     );
 
     if (!result.ok) {
-        notFound();
+        console.log("notFound() route replace")
     }
 
     return result.json();

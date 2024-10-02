@@ -3,7 +3,7 @@ import { CartData } from "@/types/cartData";
 export const addToCart = async (cartData: CartData) => {
   try {
     const response = await fetch(
-      `http://192.168.0.104:5000/api/v1/carts/add-to-cart`,
+      `${process.env.BASE_URL}/api/v1/carts/add-to-cart`,
       {
         method: "POST",
         headers: {
@@ -12,15 +12,19 @@ export const addToCart = async (cartData: CartData) => {
         body: JSON.stringify(cartData),
       }
     );
-    console.log(response);
     const result = await response.json();
     if (response.ok) {
       console.log("Added to cart:", result);
     } else {
       console.error("Error adding to cart:", result.message);
     }
+    return result;
   } catch (error) {
     console.error("An error occurred:", error);
+    return {
+      success: false,
+      message: "An error occurred while adding to cart",
+    };
   } finally {
     // setIsAdding(false);
   }
@@ -28,7 +32,7 @@ export const addToCart = async (cartData: CartData) => {
 
 export const getCart = async (userId: string) => {
   try {
-    const response = await fetch(`http://192.168.0.104:5000/api/v1/carts/${userId}`);
+    const response = await fetch(`${process.env.BASE_URL}/api/v1/carts/${userId}`);
     const data = await response.json();
     if (data.success) {
       return data.cart;

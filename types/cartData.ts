@@ -4,3 +4,8 @@ export interface CartData {
   quantity: number;
   price: number;
 }
+
+export interface FavData {
+  userId: string;
+  productId: string;
+}
