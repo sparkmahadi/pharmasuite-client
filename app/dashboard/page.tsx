@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import DashSideNav from "../components/Dashboard/DashSideNav";
+import DashSideNav from "../components/Dashboard/SideNavs/DashSideNav";
 import { CiMenuBurger } from "react-icons/ci";
 import { getOrderHistory } from "@/lib/users/orderFunction";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,7 @@ import { setFavourites } from "@/redux/favourites/favouritesSlice";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { _id: userId, name, email } = useSelector((state: any) => state.user.userDetails);
+  const { _id: userId, name, email, role } = useSelector((state: any) => state.user.userDetails);
   const { cart } = useSelector((state: any) => state.cart);
   const { favourites } = useSelector((state: any) => state.favourites);
   const { orders } = useSelector((state: any) => state.orders);
@@ -197,7 +197,7 @@ const Dashboard = () => {
       {/* Sidebar Navigation */}
       <div className="drawer-side">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-        <DashSideNav />
+        <DashSideNav userRole={role}/>
       </div>
     </div>
   );
