@@ -15,6 +15,7 @@ const Favourites = () => {
     const fetchFavourites = async () => {
       try {
         const data = await getFavourites(userId);
+        console.log(data);
         if (data.success) {
           setFavourites(data.favourites);
         }
@@ -32,7 +33,7 @@ const Favourites = () => {
   return (
     <div>
       <h2>My Favourites</h2>
-      {favourites?.products.length ? (
+      {favourites?.products?.length ? (
         favourites.products.map((productId: string) => (
           <div key={productId}>
             <p>Product ID: {productId}</p>

@@ -3,7 +3,7 @@ export const getOrderHistory = async (userId: string) => {
     const response = await fetch(`${process.env.BASE_URL}/api/v1/orders/${userId}`);
     const data = await response.json();
     if (data.success) {
-      return data.orders;
+      return data;
     } else{
       return data;
     }

@@ -6,7 +6,7 @@ export const getFavourites = async (userId: string) => {
     const data = await response.json();
     console.log('favadata',data);
     if (data.success) {
-      return data.items;
+      return data;
     }
   } catch (error) {
     console.error("Error fetching favourites:", error);

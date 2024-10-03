@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 export default async function getMainProducts() {
     const result = await fetch(
-        `${process.env.BASE_URL}/api/v1/products/main-products`,
+        `${process.env.BASE_URL}/api/v1/all-products/get-all-products`,
         {
             next: {
                 revalidate: 1000,

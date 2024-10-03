@@ -13,37 +13,76 @@ import { getCart } from "@/lib/users/cartFunction";
 import { setCart } from "@/redux/cart/cartSlice";
 import { setOrders } from "@/redux/order/orderSlice";
 import Link from "next/link";
+import { setFavourites } from "@/redux/favourites/favouritesSlice";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { _id: userId, name, email } = useSelector((state: any) => state.user.userDetails);
   const { cart } = useSelector((state: any) => state.cart);
+  const { favourites } = useSelector((state: any) => state.favourites);
   const { orders } = useSelector((state: any) => state.orders);
   const { loading } = useSelector((state: any) => state.loader);
   const [totalProducts, setTotalProducts] = useState(0);
-  const [totalFavorites, setTotalFavorites] = useState(0);
   const [cartItems, setCartItems] = useState([]);
+  const [recentOrders, setRecentOrders] = useState([]);
+  const [spendingSummary, setSpendingSummary] = useState({
+    totalSpentThisMonth: 0,
+    lastMonthSpent: 0,
+  });
+  const [notifications, setNotifications] = useState([]);
+  const [recommendedProducts, setRecommendedProducts] = useState([]);
 
   useEffect(() => {
     const loadDashboardData = async () => {
       try {
         dispatch(showLoader());
-        const cart = await getCart(userId);
+
+        // Cart data
+        const cartData = await getCart(userId);
+        const cart = cartData?.cart;
         if (cart?.length) {
           dispatch(setCart(cart));
         }
-        const orders = await getOrderHistory(userId);
-        console.log(orders);
+
+        // Order history
+        const ordersData = await getOrderHistory(userId);
+        const orders = ordersData?.orders;
         if (orders?.length) {
           dispatch(setOrders(orders));
+          setRecentOrders(orders.slice(0, 5)); // Display the 5 most recent orders
         }
-        
-        const products = await getMainProducts();
-        const favorites = await getFavourites(userId);
 
-        setTotalProducts(products.total);
-        setTotalFavorites(favorites.length);
+        // Favourites
+        const favsData = await getFavourites(userId);
+        const favourites = favsData?.favourites?.products;
+        if (favourites?.length) {
+          dispatch(setFavourites(favourites));
+        }
+
+        // Product data
+        const products = await getMainProducts();
+        setTotalProducts(products?.length);
+
+        // Simulated spending summary data
+        setSpendingSummary({
+          totalSpentThisMonth: 500, // Replace with real calculation
+          lastMonthSpent: 400, // Replace with real calculation
+        });
+
+        // Simulated notifications
+        setNotifications([
+          { id: 1, message: "Your recent order has been shipped." },
+          { id: 2, message: "Don't miss out on the upcoming sale!" },
+        ]);
+
+        // Simulated recommended products
+        setRecommendedProducts([
+          { id: 1, item_name: "Vitamin D Supplement", price: 20 },
+          { id: 2, item_name: "Pain Relief Cream", price: 15 },
+        ]);
+
         setCartItems(cart.items);
+
       } catch (error) {
         console.error("Error loading dashboard data", error);
       } finally {
@@ -89,8 +128,8 @@ const Dashboard = () => {
 
             <Link href={"/favourites"}>
               <div className="p-4 bg-white rounded-lg shadow">
-                <h3 className="text-lg font-bold">Favorites</h3>
-                <p>Favorite Items: {totalFavorites}</p>
+                <h3 className="text-lg font-bold">Favourites</h3>
+                <p>Favorite Items: {favourites?.length}</p>
               </div>
             </Link>
 
@@ -101,6 +140,55 @@ const Dashboard = () => {
               </div>
             </Link>
 
+          </div>
+
+          {/* Recent Activity */}
+          <div className="p-4 bg-white rounded-lg shadow mb-6">
+            <h3 className="text-lg font-bold">Recent Activity</h3>
+            {recentOrders.length ? (
+              <ul>
+                {recentOrders.map((order, idx) => (
+                  <li key={idx}>Order #{order._id} placed on {order.date}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>No recent orders.</p>
+            )}
+          </div>
+
+          {/* Order Status */}
+          <div className="p-4 bg-white rounded-lg shadow mb-6">
+            <h3 className="text-lg font-bold">Order Status</h3>
+            <p>Pending Orders: {/* pending orders count */}</p>
+            <p>Shipped Orders: {/* shipped orders count */}</p>
+            <p>Delivered Orders: {/* delivered orders count */}</p>
+          </div>
+
+          {/* Spending Summary */}
+          <div className="p-4 bg-white rounded-lg shadow mb-6">
+            <h3 className="text-lg font-bold">Spending Summary</h3>
+            <p>Total Spent This Month: ${spendingSummary.totalSpentThisMonth}</p>
+            <p>Last Month: ${spendingSummary.lastMonthSpent}</p>
+          </div>
+
+          {/* Notifications */}
+          <div className="p-4 bg-white rounded-lg shadow mb-6">
+            <h3 className="text-lg font-bold">Notifications</h3>
+            <ul>
+              {notifications.map((notification) => (
+                <li key={notification.id}>{notification.message}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Recommended Products */}
+          <div className="p-4 bg-white rounded-lg shadow mb-6">
+            <h3 className="text-lg font-bold">Recommended Products</h3>
+            <ul>
+              {recommendedProducts.map((product) => (
+                <li key={product.id}>{product.item_name} - ${product.price}</li>
+              ))}
+            </ul>
           </div>
 
         </div>

@@ -35,7 +35,7 @@ export const getCart = async (userId: string) => {
     const response = await fetch(`${process.env.BASE_URL}/api/v1/carts/${userId}`);
     const data = await response.json();
     if (data.success) {
-      return data.cart;
+      return data;
     }
   } catch (error) {
     console.error("Error fetching cart:", error);
