@@ -35,7 +35,7 @@ const RightSideIcons = () => {
   }, [dispatch]);
   return (
     <div className="flex justify-center xl:gap-5 2xl:gap-20">
-      <Link href={"orders"} className={rightIconDivs}>
+      <Link href={"/orders"} className={rightIconDivs}>
         <FaTruck className={navIcon} />
         <p className="xl:flex flex-col justify-center text-sm hidden">
           <span>Track</span>
@@ -51,7 +51,7 @@ const RightSideIcons = () => {
           </span>
         </div>
         <span className="font-bold hidden xl:block">
-          <Link href={"cart"}>Cart</Link>
+          <Link href={"/cart"}>Cart</Link>
         </span>
       </div>
 

@@ -96,13 +96,7 @@ const Dashboard = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="drawer">
-      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
-        {/* Menu button */}
-        <label htmlFor="my-drawer" className="btn drawer-button">
-          <CiMenuBurger className="w-5 h-5" />
-        </label>
+
 
         <div className="p-4">
           {/* Profile Section */}
@@ -192,14 +186,8 @@ const Dashboard = () => {
           </div>
 
         </div>
-      </div>
 
-      {/* Sidebar Navigation */}
-      <div className="drawer-side">
-        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-        <DashSideNav userRole={role}/>
-      </div>
-    </div>
+
   );
 };
 

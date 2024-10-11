@@ -1,12 +1,13 @@
 "use client"
 
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaHome, FaUser, FaListUl, FaBloggerB, FaArchive, FaBell, FaEnvelope, FaBoxes, FaClipboardList, FaChartLine, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import { IoIosArrowForward } from 'react-icons/io';
 
 const AdminSideNav = () => {
     const [selected, setSelected] = useState<string | null>(null);
-    const liClasses = "text-sm flex items-center hover:text-[#f84525] before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3";
+    const liClasses = "text-sm flex items-center hover:text-[#f84525] before:content-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3 cursor-pointer";
 
     const handleDropdownToggle = (item: string) => {
         setSelected(prev => (prev === item ? null : item));
@@ -60,7 +61,13 @@ const AdminSideNav = () => {
                     </a>
                     <ul className={`pl-7 mt-2 ${selected === 'products' ? 'block' : 'hidden'}`}>
                         <li className="mb-4">
-                            <p className={liClasses}>All Products</p>
+                            <Link href={"/dashboard/all-products"}><p className={liClasses}>All Products</p></Link>
+                        </li>
+                        <li className="mb-4">
+                            <Link href={"/dashboard/main-products"}><p className={liClasses}>Main Products</p></Link>
+                        </li>
+                        <li className="mb-4">
+                            <Link href={"/dashboard/other-products"}><p className={liClasses}>Other Products</p></Link>
                         </li>
                         <li className="mb-4">
                             <p className={liClasses}>Add New</p>
