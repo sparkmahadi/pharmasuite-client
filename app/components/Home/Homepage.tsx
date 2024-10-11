@@ -21,6 +21,18 @@ const Homepage = async() => {
       <div className="py-10">
         <CategorySection catName={"devices-equipments"} limit={10}/>
       </div>
+      <div className="py-10">
+        <CategorySection catName={"baby-care"} limit={10}/>
+      </div>
+      <div className="py-10">
+        <CategorySection catName={"health-beauty"} limit={10}/>
+      </div>
+      <div className="py-10">
+        <CategorySection catName={"personal-care"} limit={10}/>
+      </div>
+      <div className="py-10">
+        <CategorySection catName={"surgical"} limit={10}/>  
+      </div>
     </div>
   );
 };
