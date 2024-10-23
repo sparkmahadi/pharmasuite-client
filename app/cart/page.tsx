@@ -18,7 +18,7 @@ const Cart = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const updateCartQuantity = async (productId: string, delta: number) => {
-    const updatedCart = cart.map((item) =>
+    const updatedCart = cart.map((item: any) =>
       item.productId === productId
         ? { ...item, quantity: item.quantity + delta }
         : item
@@ -35,7 +35,7 @@ const Cart = () => {
   };
 
   const deleteFromCart = async (productId: string) => {
-    const updatedCart = cart.filter((item) => item.productId !== productId);
+    const updatedCart = cart.filter((item: any) => item.productId !== productId);
     dispatch(setCart(updatedCart));
     await saveCart(updatedCart);
   };
@@ -105,7 +105,7 @@ const Cart = () => {
 
   if (loading) return <Loader />;
 
-  const totalCost = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalCost = cart.reduce((acc:any, item:any) => acc + item.price * item.quantity, 0);
 
   return (
     <div className="flex flex-col lg:flex-row max-w-6xl mx-auto p-6 space-y-6 lg:space-y-0 lg:space-x-8">

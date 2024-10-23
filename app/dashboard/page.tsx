@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import DashSideNav from "../components/Dashboard/SideNavs/DashSideNav";
-import { CiMenuBurger } from "react-icons/ci";
 import { getOrderHistory } from "@/lib/users/orderFunction";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoader, showLoader } from "@/redux/user/loaderSlice";

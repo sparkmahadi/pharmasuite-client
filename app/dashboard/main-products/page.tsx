@@ -32,7 +32,7 @@ const MainProductsList = () => {
     }, [page, limit]);
 
     // Handle page change
-    const handlePageChange = (newPage) => {
+    const handlePageChange = (newPage: any) => {
         setPage(newPage);
     };
 
@@ -59,7 +59,7 @@ const MainProductsList = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            products?.map(pd =>
+                                            products?.map((pd: any) =>
                                                 <tr key={pd?._id} className="border-b border-dashed last:border-b-0">
                                                     <td className="p-3 pl-0">
                                                         <div className="flex items-center">

@@ -1,5 +1,5 @@
 "use client"
-
+import ImageUpload from '@/app/components/Dashboard/AddProducts/ImageUpload';
 import { useEffect, useState } from 'react';
 
 const AddMainProduct = () => {
@@ -86,76 +86,7 @@ const AddMainProduct = () => {
   return (
     <div className="max-w-xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Add New Product</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="item_name"
-          placeholder="Item Name"
-          value={formData.item_name}
-          onChange={(e) => setFormData({ ...formData, item_name: e.target.value })}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-
-        <textarea
-          name="item_desc"
-          placeholder="Item Description"
-          value={formData.item_desc}
-          onChange={(e) => setFormData({ ...formData, item_desc: e.target.value })}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-
-        {/* Category Dropdown */}
-        <select
-          name="cat_name"
-          value={formData.cat_name}
-          onChange={handleCategoryChange}
-          className="block w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-          <option value="new-category">Add New Category</option>
-        </select>
-
-        {/* Input for New Category */}
-        {isNewCategory && (
-          <input
-            type="text"
-            placeholder="New Category Name"
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        )}
-
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={formData.price}
-          onChange={(e) => setFormData({ ...formData, price: +e.target.value })}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-
-        <input
-          type="number"
-          name="stock_qty"
-          placeholder="Stock Quantity"
-          value={formData.stock_qty}
-          onChange={(e) => setFormData({ ...formData, stock_qty: +e.target.value })}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Add Product
-        </button>
-      </form>
+       <ImageUpload/>
     </div>
   );
 };

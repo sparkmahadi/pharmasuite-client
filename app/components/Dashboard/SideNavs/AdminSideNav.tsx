@@ -15,30 +15,30 @@ const AdminSideNav = () => {
 
     return (
         <div className="fixed left-0 top-0 w-64 h-full bg-teal-900 p-4 z-50 sidebar-menu transition-transform text-white">
-            <a href="#" className="flex items-center pb-4 border-b border-b-gray-800">
+            <Link href="/" className="flex items-center pb-4 border-b border-b-gray-800">
                 <h2 className="font-bold text-2xl">
                     Pharma{' '}
                     <span className="bg-[#f84525] text-white px-2 rounded-md">Suite</span>
                 </h2>
-            </a>
+            </Link>
             <ul className="mt-4">
                 <span className="text-gray-400 font-bold">ADMIN</span>
 
                 {/* Dashboard */}
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
+                    <Link href="/dashboard" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
                         <FaHome className="mr-3 text-lg" />
                         <span className="text-sm">Dashboard</span>
-                    </a>
+                    </Link>
                 </li>
 
                 {/* Users Management */}
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md" onClick={() => handleDropdownToggle('users')}>
+                    <div className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md" onClick={() => handleDropdownToggle('users')}>
                         <FaUser className="mr-3 text-lg" />
                         <span className="text-sm">Users</span>
                         <IoIosArrowForward className={`ml-auto ${selected === 'users' ? 'rotate-90' : ''}`} />
-                    </a>
+                    </div>
                     <ul className={`pl-7 mt-2 ${selected === 'users' ? 'block' : 'hidden'}`}>
                         <li className="mb-4">
                             <p className={liClasses}>All Users</p>
@@ -54,11 +54,11 @@ const AdminSideNav = () => {
 
                 {/* Product Management */}
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md" onClick={() => handleDropdownToggle('products')}>
+                    <div className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md" onClick={() => handleDropdownToggle('products')}>
                         <FaBoxes className="mr-3 text-lg" />
                         <span className="text-sm">Products</span>
                         <IoIosArrowForward className={`ml-auto ${selected === 'products' ? 'rotate-90' : ''}`} />
-                    </a>
+                    </div>
                     <ul className={`pl-7 mt-2 ${selected === 'products' ? 'block' : 'hidden'}`}>
                         <li className="mb-4">
                             <Link href={"/dashboard/all-products"}><p className={liClasses}>All Products</p></Link>
@@ -70,7 +70,7 @@ const AdminSideNav = () => {
                             <Link href={"/dashboard/other-products"}><p className={liClasses}>Other Products</p></Link>
                         </li>
                         <li className="mb-4">
-                            <p className={liClasses}>Add New</p>
+                        <Link href={"/dashboard/add-products"}><p className={liClasses}>Add New Product</p></Link>
                         </li>
                         <li className="mb-4">
                             <p className={liClasses}>Categories</p>
@@ -83,11 +83,11 @@ const AdminSideNav = () => {
 
                 {/* Orders Management */}
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md" onClick={() => handleDropdownToggle('orders')}>
+                    <div className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md" onClick={() => handleDropdownToggle('orders')}>
                         <FaClipboardList className="mr-3 text-lg" />
                         <span className="text-sm">Orders</span>
                         <IoIosArrowForward className={`ml-auto ${selected === 'orders' ? 'rotate-90' : ''}`} />
-                    </a>
+                    </div>
                     <ul className={`pl-7 mt-2 ${selected === 'orders' ? 'block' : 'hidden'}`}>
                         <li className="mb-4">
                             <p className={liClasses}>All Orders</p>
@@ -103,20 +103,20 @@ const AdminSideNav = () => {
 
                 {/* Analytics */}
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
+                    <Link href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
                         <FaChartLine className="mr-3 text-lg" />
                         <span className="text-sm">Analytics</span>
-                    </a>
+                    </Link>
                 </li>
 
                 {/* Blog Management */}
                 <span className="text-gray-400 font-bold">BLOG</span>
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md" onClick={() => handleDropdownToggle('blog')}>
+                    <Link href="/dashboard/analytics" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md" onClick={() => handleDropdownToggle('blog')}>
                         <FaBloggerB className="mr-3 text-lg" />
                         <span className="text-sm">Post</span>
                         <IoIosArrowForward className={`ml-auto ${selected === 'blog' ? 'rotate-90' : ''}`} />
-                    </a>
+                    </Link>
                     <ul className={`pl-7 mt-2 ${selected === 'blog' ? 'block' : 'hidden'}`}>
                         <li className="mb-4">
                             <p className={liClasses}>All Posts</p>
@@ -129,10 +129,10 @@ const AdminSideNav = () => {
 
                 {/* Archive */}
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
+                    <Link href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
                         <FaArchive className="mr-3 text-lg" />
                         <span className="text-sm">Archive</span>
-                    </a>
+                    </Link>
                 </li>
 
                 {/* Personal Notifications and Messages */}
@@ -158,16 +158,16 @@ const AdminSideNav = () => {
 
                 {/* Settings and Logout */}
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
+                    <Link href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
                         <FaCog className="mr-3 text-lg" />
                         <span className="text-sm">Settings</span>
-                    </a>
+                    </Link>
                 </li>
                 <li className="mb-1 group">
-                    <a href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
+                    <Link href="#" className="flex font-semibold items-center py-2 px-4 hover:bg-teal-950 hover:text-gray-100 rounded-md">
                         <FaSignOutAlt className="mr-3 text-lg" />
                         <span className="text-sm">Logout</span>
-                    </a>
+                    </Link>
                 </li>
             </ul>
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 hidden" />

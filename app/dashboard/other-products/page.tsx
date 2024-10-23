@@ -94,10 +94,10 @@ const OtherProductsList = () => {
                                                         <span className="font-semibold text-light-inverse text-md/normal">2023-08-23</span>
                                                     </td>
                                                     <td className="p-3 pr-0 text-end">
-                                                        <button className="ml-auto relative text-secondary-dark bg-light-dark hover:text-primary flex items-center h-[25px] w-[25px] text-base font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-200 ease-in-out shadow-none border-0 justify-center">
+                                                        <button className="mx-auto relative text-secondary-dark bg-light-dark hover:text-primary flex items-center h-[25px] w-[25px] text-base font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-200 ease-in-out shadow-none border-0 justify-center">
                                                             <span className="flex items-center justify-center p-0 m-0 gap-2">
-                                                                <FaEdit />
-                                                                <MdDeleteSweep />
+                                                                <FaEdit className={`w-4 h-4`}/>
+                                                                <MdDeleteSweep className={`w-4 h-4`}/>
                                                             </span>
                                                         </button>
                                                     </td>
