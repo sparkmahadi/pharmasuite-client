@@ -118,7 +118,7 @@ const MainProductsList = () => {
 
             {/* Pagination controls */}
             <div className="pagination flex space-x-2 mt-4">
-                {[...Array(totalPages)].map((_, i) => (
+                {[...Array(totalPages)].map((_:any, i:any) => (
                     <button
                         key={i}
                         onClick={() => handlePageChange(i + 1)}

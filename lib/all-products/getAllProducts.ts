@@ -18,6 +18,6 @@ console.log('all products api call');
         return data;
     } catch (error) {
         console.error("Error fetching products:", error);
-        notFound(); // Navigate to the notFound page if there's a fetch error
+        notFound(); // Navigate to the notFound page if there&apos; a fetch error
     }
 }

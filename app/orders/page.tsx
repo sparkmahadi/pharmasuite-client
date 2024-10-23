@@ -59,7 +59,7 @@ const OrderHistory = () => {
       if (data.success) {
         // Update the order status in the local state
         setOrders((prevOrders) =>
-          prevOrders.map((order) =>
+          prevOrders.map((order:any) =>
             order._id === orderId ? { ...order, status: "Cancelled" } : order
           )
         );

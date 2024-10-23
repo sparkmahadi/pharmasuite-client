@@ -27,8 +27,8 @@ const Dashboard = () => {
     totalSpentThisMonth: 0,
     lastMonthSpent: 0,
   });
-  const [notifications, setNotifications] = useState([]);
-  const [recommendedProducts, setRecommendedProducts] = useState([]);
+  const [notifications, setNotifications] = useState([{}]);
+  const [recommendedProducts, setRecommendedProducts] = useState([{}]);
 
   useEffect(() => {
     const loadDashboardData = async () => {
@@ -139,7 +139,7 @@ const Dashboard = () => {
             <h3 className="text-lg font-bold">Recent Activity</h3>
             {recentOrders.length ? (
               <ul>
-                {recentOrders.map((order, idx) => (
+                {recentOrders.map((order:any, idx:any) => (
                   <li key={idx}>Order #{order._id} placed on {order.date}</li>
                 ))}
               </ul>
@@ -167,7 +167,7 @@ const Dashboard = () => {
           <div className="p-4 bg-white rounded-lg shadow mb-6">
             <h3 className="text-lg font-bold">Notifications</h3>
             <ul>
-              {notifications.map((notification) => (
+              {notifications.map((notification:any) => (
                 <li key={notification.id}>{notification.message}</li>
               ))}
             </ul>
@@ -177,7 +177,7 @@ const Dashboard = () => {
           <div className="p-4 bg-white rounded-lg shadow mb-6">
             <h3 className="text-lg font-bold">Recommended Products</h3>
             <ul>
-              {recommendedProducts.map((product) => (
+              {recommendedProducts.map((product:any) => (
                 <li key={product.id}>{product.item_name} - ${product.price}</li>
               ))}
             </ul>

@@ -5,10 +5,11 @@ import getOtherProductsByCat from "@/lib/other-products/getOtherProductsByCat";
 import { MedicineItem } from "@/types/product";
 import React from "react";
 
+// @ts-ignore
 const CategoryDetails = async ({ params }) => {
   const { category } = params;
   const categoryDetails = await getCatByName(category);
-  const products = await getOtherProductsByCat(category);
+  const products = await getOtherProductsByCat(category, 10);
   console.log(category);
 
   return (

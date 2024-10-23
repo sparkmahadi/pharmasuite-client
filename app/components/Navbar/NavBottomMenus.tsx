@@ -48,7 +48,7 @@ const NavBottomMenus = async () => {
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
           >
             {categories?.length > 0 ?
-              categories?.map((cat) => (
+              categories?.map((cat:any) => (
                 <li key={cat._id}>
                   <Link href={cat.href}>{cat.title}</Link>
                 </li>

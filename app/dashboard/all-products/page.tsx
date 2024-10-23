@@ -32,7 +32,7 @@ const AllProductsList = () => {
     }, [page, limit]);
 
     // Handle page change
-    const handlePageChange = (newPage) => {
+    const handlePageChange = (newPage: any) => {
         setPage(newPage);
     };
 
@@ -59,7 +59,7 @@ const AllProductsList = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            products?.map(pd =>
+                                            products?.map((pd:any) =>
                                                 <tr key={pd?._id} className="border-b border-dashed last:border-b-0">
                                                     <td className="p-3 pl-0">
                                                         <div className="flex items-center">
@@ -118,7 +118,7 @@ const AllProductsList = () => {
 
             {/* Pagination controls */}
             <div className="pagination flex space-x-2 mt-4">
-                {[...Array(totalPages)].map((_, i) => (
+                {[...Array(totalPages)].map((_:any, i:any) => (
                     <button
                         key={i}
                         onClick={() => handlePageChange(i + 1)}

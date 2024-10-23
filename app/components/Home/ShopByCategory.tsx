@@ -1,5 +1,4 @@
 import { myStyles } from "@/app/variables/myStyles";
-import getAllCategories from "@/lib/other-products/getAllCategories";
 import { Category, ShopByCategoryProps } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";

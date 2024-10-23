@@ -64,10 +64,10 @@ const SidebarContent = () => {
                 <Link href={"/otc-medicines"}>Healthcare Products</Link>
               </li>
               <li>
-                <Link href={"/otc-medicines"}>Men's Products</Link>
+                <Link href={"/otc-medicines"}>Men&apos;s Products</Link>
               </li>
               <li>
-                <Link href={"/otc-medicines"}>Women's Products</Link>
+                <Link href={"/otc-medicines"}>Women&apos;s Products</Link>
               </li>
               <li>
                 <Link href={"/otc-medicines"}>Baby Care</Link>

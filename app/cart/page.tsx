@@ -30,7 +30,7 @@ const Cart = () => {
   const increaseQuantity = (productId: string) => updateCartQuantity(productId, 1);
 
   const decreaseQuantity = (productId: string) => {
-    const item = cart.find((i) => i.productId === productId);
+    const item = cart.find((i:any) => i.productId === productId);
     if (item?.quantity > 1) updateCartQuantity(productId, -1);
   };
 

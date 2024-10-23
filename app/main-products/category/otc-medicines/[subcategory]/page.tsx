@@ -6,6 +6,7 @@ import { myStyles } from "@/app/variables/myStyles";
 import React from "react";
 import ProductCard from "@/app/components/Products/ProductCard";
 
+// @ts-ignore
 const OTCMedicines = async ({ params }) => {
   const { subcategory } = params;
   const products = await getProductsBySubCat("otc", subcategory);
